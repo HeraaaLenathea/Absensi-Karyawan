@@ -1,0 +1,27 @@
+-- Tabel karyawan
+CREATE TABLE karyawan (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nip VARCHAR(20) UNIQUE NOT NULL,
+    nama VARCHAR(100) NOT NULL,
+    jabatan VARCHAR(50) NOT NULL,
+    departemen VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);
+
+-- Tabel absensi
+CREATE TABLE absensi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    karyawan_id INT NOT NULL,
+    tanggal DATE NOT NULL,
+    jam_masuk TIME,
+    jam_keluar TIME,
+    status ENUM('Hadir', 'Izin', 'Sakit', 'Alfa') NOT NULL,
+    keterangan TEXT,
+    FOREIGN KEY (karyawan_id) REFERENCES karyawan(id) ON DELETE CASCADE
+);
+
+-- Insert data awal ke tabel karyawan
+INSERT INTO karyawan (nip, nama, jabatan, departemen, email) VALUES
+('K001', 'Budi Santoso', 'Manager', 'IT', 'budi@email.com'),
+('K002', 'Siti Nurhaliza', 'Staff', 'Finance', 'siti@email.com'),
+('K003', 'Ahmad Rizki', 'Supervisor', 'HR', 'ahmad@email.com');
